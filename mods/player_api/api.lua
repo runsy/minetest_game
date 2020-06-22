@@ -32,6 +32,18 @@ function player_api.get_animation(player)
 	}
 end
 
+function player_api.set_gender(player)
+	local gender
+	if math.random(2) == 1 then
+		gender = "male"
+	else
+		gender = "female"
+	end
+	local meta = player:get_meta()
+	meta:set_string("gender", gender)
+	return gender
+end
+
 -- Called when a player's appearance needs to be updated
 function player_api.set_model(player, model_name)
 	local name = player:get_player_name()
