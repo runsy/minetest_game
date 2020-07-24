@@ -400,8 +400,8 @@ function default.register_mgv6_ores()
 		clust_scarcity = 36 * 36 * 36,
 		clust_num_ores = 3,
 		clust_size     = 2,
-		y_max          = -1024,
-		y_min          = -31000,
+		y_max          = -384,
+		y_min          = -512,
 	})
 end
 
@@ -2332,6 +2332,55 @@ function default.register_decorations()
 		y_min = 2,
 		decoration = "default:dry_shrub",
 		param2 = 4,
+	})
+
+	-- Rose Bush
+
+	minetest.register_decoration({
+		name = "default:rose_bush",
+		deco_type = "simple",
+		place_on = {"default:dirt_with_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.02,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"deciduous_forest"},
+		y_max = 31000,
+		y_min = 2,
+		decoration = "default:rose_bush"
+	})
+
+	-- Sunflower
+
+	minetest.register_decoration({
+		name = "flowers:sunflower",
+		deco_type = "schematic",
+		place_on = {"default:dirt_with_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0.0005,
+			scale = 0.0002,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"grassland"},
+		y_max = 31000,
+		y_min = 2,
+		schematic = {
+			size = {x = 1, y = 2, z = 1},
+			data = {
+				{name = "flowers:sunflower"}, {name = "flowers:sunflower_top"},
+			}
+		},
+		flags = "place_center_x, place_center_z, force_placement",
+		place_offset_y = 1,
 	})
 
 	-- Marram grass

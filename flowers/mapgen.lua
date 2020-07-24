@@ -154,6 +154,7 @@ end
 
 function flowers.register_decorations()
 	register_flower(436,     "rose")
+	register_flower(126,     "rose_bush")
 	register_flower(19822,   "tulip")
 	register_flower(1220999, "dandelion_yellow")
 	register_flower(800081,  "chrysanthemum_green")

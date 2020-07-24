@@ -1423,6 +1423,27 @@ minetest.register_node("default:dry_shrub", {
 	},
 })
 
+minetest.register_node("default:rose_bush", {
+	description = S("Rose Bush"),
+	drawtype = "plantlike",
+	waving = 1,
+	tiles = {"default_rose_bush.png"},
+	inventory_image = "default_rose_bush.png",
+	wield_image = "default_rose_bush.png",
+	paramtype = "light",
+	--paramtype2 = "meshoptions",
+	--place_param2 = 4,
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+	groups = {snappy = 3, flammable = 3, flower =1, flora=1,  attached_node = 1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 4 / 16, 6 / 16},
+	},
+})
+
 minetest.register_node("default:junglegrass", {
 	description = S("Jungle Grass"),
 	drawtype = "plantlike",
@@ -1442,7 +1463,6 @@ minetest.register_node("default:junglegrass", {
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
 	},
 })
-
 
 minetest.register_node("default:grass_1", {
 	description = S("Grass"),

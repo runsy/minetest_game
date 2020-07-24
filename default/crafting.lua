@@ -403,6 +403,14 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "default:rose_bush",
+	recipe = {
+		{"", "", ""},
+		{"flowers:rose", "", "flowers:rose"},
+		{"flowers:rose", "", "flowers:rose"},
+	}
+})
 
 --
 -- Crafting (tool repair)
