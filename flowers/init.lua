@@ -347,9 +347,7 @@ minetest.register_node("flowers:sunflower_top", {
 	waving = 1,
 	groups = {snappy = 3, flammable = 3, flower =1, flora=1,  attached_node = 1, not_in_creative_inventory=1},
 	sounds = default.node_sound_leaves_defaults(),
-	diggable = false,
-	pointable = false,
-	drop = {},
+	drop = "flowers:sunflower",
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.1875, 0.5, 0.1875}
@@ -381,7 +379,11 @@ minetest.register_node("flowers:sunflower", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.1875, 0.5, 0.1875}
 	},
+
 	on_place = function(itemstack, placer, pointed_thing)
+		if not(pointed_thing.type) == "node" then
+			return
+		end
 		local pos_above = minetest.get_pointed_thing_position(pointed_thing, true)
 		local pos_sunflower_top = pos_above
 		pos_sunflower_top.y = pos_sunflower_top.y + 1
@@ -389,14 +391,20 @@ minetest.register_node("flowers:sunflower", {
 		if node and node.name == "air" then
 			pos_above.y = pos_above.y - 1
 			minetest.set_node(pos_above, {name = "flowers:sunflower"})
-			itemstack:take_item(1)
+			local player_name = placer and placer:get_player_name() or ""
+			if not (creative and creative.is_enabled_for
+				and creative.is_enabled_for(player_name)) then
+					itemstack:take_item()
+			end
 			return itemstack
 		end
 	end,
+
 	on_construct = function(pos)
 		pos.y = pos.y + 1
 		minetest.place_node(pos, {name = "flowers:sunflower_top"})
 	end,
+
 	after_destruct = function(pos, oldnode)
 		pos.y = pos.y + 1
 		local node = minetest.get_node_or_nil(pos)

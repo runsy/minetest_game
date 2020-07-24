@@ -2363,7 +2363,7 @@ function default.register_decorations()
 		place_on = {"default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.0005,
+			offset = 0.001,
 			scale = 0.0002,
 			spread = {x = 200, y = 200, z = 200},
 			seed = 329,
