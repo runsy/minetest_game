@@ -339,6 +339,7 @@ minetest.register_node("flowers:waterlily_waving", waterlily_waving_def)
 --
 
 minetest.register_node("flowers:sunflower_top", {
+	description = S("Sunflower").. " "..S("(top)"),
 	drawtype = "plantlike",
 	visual_scale = 1.0,
 	tiles = {"flowers_sunflower_top.png"},
