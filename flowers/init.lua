@@ -346,7 +346,7 @@ minetest.register_node("flowers:sunflower_top", {
 	paramtype = "light",
 	walkable = true,
 	waving = 1,
-	groups = {snappy = 3, flammable = 3, flower =1, flora=1,  attached_node = 1, not_in_creative_inventory=1},
+	groups = {snappy = 3, flammable = 3, flower =1, flora=1, attached_node = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	drop = "flowers:sunflower",
 	selection_box = {
@@ -365,8 +365,6 @@ minetest.register_node("flowers:sunflower_top", {
 minetest.register_node("flowers:sunflower", {
 	description = S("Sunflower"),
 	drawtype = "plantlike",
-	paramtype2 = "meshoptions",
-	param2= 0,
 	visual_scale = 1.0,
 	tiles = {"flowers_sunflower_bottom.png"},
 	inventory_image = "flowers_sunflower_top.png",
@@ -374,7 +372,7 @@ minetest.register_node("flowers:sunflower", {
 	paramtype = "light",
 	walkable = true,
 	waving = 1,
-	groups = {snappy = 3, flammable = 3, flower =1, flora=1,  attached_node = 1},
+	groups = {snappy = 3, flammable = 3, flower =1, flora=1, attached_node = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -414,4 +412,3 @@ minetest.register_node("flowers:sunflower", {
 		end
 	end
 })
-

@@ -20,3 +20,6 @@
 .metadata
 # Idea IDE
 .idea/*
+
+#misc
+sync.sh
