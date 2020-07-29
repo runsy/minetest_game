@@ -428,6 +428,13 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "farming:string",
+	recipe = {
+		{"default:reed", "default:reed"},
+	}
+})
+
+minetest.register_craft({
 	output = "default:skeleton_key",
 	recipe = {
 		{"default:gold_ingot"},

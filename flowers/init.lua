@@ -33,20 +33,25 @@ minetest.register_alias("flowers:flower_dandelion_white", "flowers:dandelion_whi
 
 -- Flower registration
 
-local function add_simple_flower(name, desc, box, f_groups)
+local function add_simple_flower(name, desc, box, f_groups, inv_img)
 	-- Common flowers' groups
 	f_groups.snappy = 3
 	f_groups.flower = 1
 	f_groups.flora = 1
 	f_groups.attached_node = 1
 
+	local inventory_image = "flowers_" .. name
+	if inv_img then
+		inventory_image = inventory_image .. "_inv"
+	end
+
 	minetest.register_node("flowers:" .. name, {
 		description = desc,
 		drawtype = "plantlike",
 		waving = 1,
 		tiles = {"flowers_" .. name .. ".png"},
-		inventory_image = "flowers_" .. name .. ".png",
-		wield_image = "flowers_" .. name .. ".png",
+		inventory_image = inventory_image .. ".png",
+		wield_image =  "flowers_" .. name .. ".png",
 		sunlight_propagates = true,
 		paramtype = "light",
 		walkable = false,
@@ -65,7 +70,8 @@ flowers.datas = {
 		"rose",
 		S("Red Rose"),
 		{-2 / 16, -0.5, -2 / 16, 2 / 16, 5 / 16, 2 / 16},
-		{color_red = 1, flammable = 1}
+		{color_red = 1, flammable = 1},
+		true
 	},
 	{
 		"tulip",
@@ -108,6 +114,30 @@ flowers.datas = {
 		S("Black Tulip"),
 		{-2 / 16, -0.5, -2 / 16, 2 / 16, 3 / 16, 2 / 16},
 		{color_black = 1, flammable = 1}
+	},
+	{
+		"calla",
+		S("Calla"),
+		{-2 / 16, -0.5, -2 / 16, 2 / 16, 3 / 16, 2 / 16},
+		{color_white = 1, flammable = 1}
+	},
+	{
+		"gerbera_daisy",
+		S("Gerbera Daisy"),
+		{-2 / 16, -0.5, -2 / 16, 2 / 16, 3 / 16, 2 / 16},
+		{color_orange = 1, flammable = 1}
+	},
+	{
+		"yellow_bell",
+		S("Campanilla Amarilla"),
+		{-2 / 16, -0.5, -2 / 16, 2 / 16, 3 / 16, 2 / 16},
+		{color_yellow = 1, flammable = 1}
+	},
+	{
+		"calendula",
+		S("Pink Calendula"),
+		{-5 / 16, -0.5, -5 / 16, 5 / 16, -2 / 16, 5 / 16},
+		{color_pink = 1, flammable = 1}
 	},
 }
 
@@ -339,10 +369,11 @@ minetest.register_node("flowers:waterlily_waving", waterlily_waving_def)
 --
 
 minetest.register_node("flowers:sunflower_top", {
-	description = S("Sunflower").. " "..S("(top)"),
+	description = S("Sunflower").. " "..S("(flower)"),
 	drawtype = "plantlike",
 	visual_scale = 1.0,
 	tiles = {"flowers_sunflower_top.png"},
+	inventory_image = "flowers_sunflower_top_inv.png",
 	paramtype = "light",
 	walkable = true,
 	waving = 1,
@@ -412,3 +443,70 @@ minetest.register_node("flowers:sunflower", {
 		end
 	end
 })
+
+-- Hedges
+
+flowers.hedges = {
+	{
+		"white_blue",
+		S("White & Blue"),
+		{"flowers:dandelion_white", "flowers:geranium"}
+	},
+	{
+		"violet_blue",
+		S("Violet & Blue"),
+		{"flowers:viola", "flowers:geranium"}
+	},
+	{
+		"red_pink",
+		S("Red & Pink"),
+		{"default:rose_bush", "flowers:geranium"}
+	},
+	{
+		"yellow_orange",
+		S("Yellow & Orange"),
+		{"flowers:dandelion_yellow", "flowers:gerbera_daisy"}
+	}
+}
+
+local function add_hedge(name, desc, recipe_items)
+
+	local node_name = "flowers:" .. name.."".."hedge"
+
+	local drop_items = recipe_items
+
+	recipe_items[#recipe_items+1] = "group:leaves"
+
+	minetest.register_node(node_name, {
+		description = S("@1 Hedge", desc),
+		drawtype = "allfaces_optional",
+		tiles = {"flowers_" .. name .. "_hedge" .. ".png"},
+		wield_image =  "flowers_" .. name .. "_hedge" .. ".png",
+		sunlight_propagates = true,
+		paramtype = "light",
+		is_ground_content = false,
+		groups = {snappy = 3, flammable = 2, flower = 1, flora = 1},
+		sounds = default.node_sound_leaves_defaults(),
+		drop = {
+			max_items = 1,
+			items = {
+					{
+					items = drop_items,
+					rarity = 1,
+					inherit_color = true,
+					}
+			}
+		}
+    })
+
+	minetest.register_craft({
+		output = node_name,
+		type = "shapeless",
+		recipe = recipe_items,
+	})
+
+end
+
+for _,item in pairs(flowers.hedges) do
+	add_hedge(unpack(item))
+end
