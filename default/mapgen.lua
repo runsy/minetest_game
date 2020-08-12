@@ -2306,8 +2306,8 @@ function default.register_decorations()
 		place_on = {"default:stone"},
 		sidelen = 16,
 		noise_params = {
-			offset = 0.1,
-			scale = 0.1,
+			offset = 0.005,
+			scale = 0.005,
 			spread = {x = 20, y = 20, z = 20},
 			seed = 549,
 			octaves = 3,
