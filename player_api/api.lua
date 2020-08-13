@@ -197,7 +197,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "player_api:gender" then
 		return
 	end
-	local player_name = player:get_player_name()
 	local gender
 	if fields.btn_male or fields.btn_female then
 		if fields.btn_male then

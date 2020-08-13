@@ -41,10 +41,9 @@ player_api.register_model("female.b3d", {
 minetest.register_on_joinplayer(function(player)
 	local player_name = player:get_player_name()
 	player_api.player_attached[player_name] = false
-	local meta = player:get_meta()
-	local gender = meta:get_string("gender")
+	local gender = player:get_meta():get_string("gender")
 	if gender == "" then
-	    gender = player_api.select_gender(player_name)
+		player_api.select_gender(player_name)
 	else
 		player_api.set_model(player, player_api.get_gender_model(gender))
 	end
