@@ -22,7 +22,11 @@ player_api.register_model("character.b3d", {
 
 player_api.register_model("female.b3d", {
 	animation_speed = 30,
-	textures = {"female.png"},
+	textures = {
+		"female.png",
+		"3d_armor_trans.png",
+		"3d_armor_trans.png",
+	},
 	animations = {
 		-- Standard animations.
 		stand = {x = 0,   y = 79},
