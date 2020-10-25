@@ -1588,6 +1588,7 @@ end
 minetest.register_node("default:fern_1", {
 	description = S("Fern"),
 	drawtype = "plantlike",
+	visual_scale = 0.8,
 	waving = 1,
 	tiles = {"default_fern_1.png"},
 	inventory_image = "default_fern_1.png",
@@ -1617,7 +1618,7 @@ for i = 2, 3 do
 		description = S("Fern"),
 		drawtype = "plantlike",
 		waving = 1,
-		visual_scale = 2,
+		visual_scale = 1.0,
 		tiles = {"default_fern_" .. i .. ".png"},
 		inventory_image = "default_fern_" .. i .. ".png",
 		wield_image = "default_fern_" .. i .. ".png",
