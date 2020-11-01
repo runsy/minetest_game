@@ -221,6 +221,14 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	local gender_model = player_api.get_gender_model(gender)
 	player_api.set_model(player, gender_model)
 	if minetest.get_modpath("3d_armor")~=nil then
+		local player_name = player:get_player_name()
+		if gender == "male" then
+			armor.default_skin = "character.png"
+			armor.textures[player_name].skin = "character.png"
+		else
+			armor.default_skin = "female.png"
+			armor.textures[player_name].skin = "female.png"
+		end
 		player_api.set_textures(player, models[gender_model].textures)
 	end
 end)
