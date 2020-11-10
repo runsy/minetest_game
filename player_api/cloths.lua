@@ -21,12 +21,9 @@ function player_api.register_cloth(name, def)
 		inventory_image = def.inventory_image,
 		wield_image = def.wield_image,
 		stack_max = def.stack_max or 16,
-		_cloth_type = def.cloth_type,
 		_cloth_texture = def.texture,
 		_cloth_genre = def.genre,
 		groups = def.groups,
-
-		allow_metadata_inventory_put = allow_metadata_inventory_put,
 	})
 end
 
@@ -34,7 +31,6 @@ player_api.register_cloth("player_api:cloth_female_upper_default", {
 	description = S("Purple Stripe Summer T-shirt"),
 	inventory_image = "cloth_female_upper_default_inv.png",
 	wield_image = "cloth_female_upper_default.png",
-	cloth_type = "upper",
 	texture = "cloth_female_upper_default.png",
 	genre = "female",
 	groups = {cloth = 2},
@@ -44,7 +40,6 @@ player_api.register_cloth("player_api:cloth_female_lower_default", {
 	description = S("Fresh Summer Denim Shorts"),
 	inventory_image = "cloth_female_lower_default_inv.png",
 	wield_image = "cloth_female_lower_default_inv.png",
-	cloth_type = "lower",
 	texture = "cloth_female_lower_default.png",
 	genre = "female",
 	groups = {cloth = 3},
@@ -54,7 +49,6 @@ player_api.register_cloth("player_api:cloth_female_head_default", {
 	description = S("Pink Bow"),
 	inventory_image = "cloth_female_head_default_inv.png",
 	wield_image = "cloth_female_head_default_inv.png",
-	cloth_type = "head",
 	texture = "cloth_female_head_default.png",
 	genre = "female",
 	groups = {cloth = 1},
@@ -64,7 +58,6 @@ player_api.register_cloth("player_api:cloth_male_upper_default", {
 	description = S("Classic Green Sweater"),
 	inventory_image = "cloth_male_upper_default_inv.png",
 	wield_image = "cloth_male_upper_default_inv.png",
-	cloth_type = "upper",
 	texture = "cloth_male_upper_default.png",
 	genre = "male",
 	groups = {cloth = 2},
@@ -74,24 +67,12 @@ player_api.register_cloth("player_api:cloth_male_lower_default", {
 	description = S("Fine Blue Pants"),
 	inventory_image = "cloth_male_lower_default_inv.png",
 	wield_image = "cloth_male_lower_default_inv.png",
-	cloth_type = "lower",
 	texture = "cloth_male_lower_default.png",
 	genre = "male",
 	groups = {cloth = 3},
 })
 
 function player_api.set_cloths(player, gender)
-	local cloths = {
-		head = nil,
-		upper = nil,
-		breast = nil,
-		left_arm = nil,
-		right_arm = nil,
-		lower = nil,
-		left_leg = nil,
-		right_leg = nil,
-		shoes = nil,
-	}
 
 	--Create the "cloths" inventory
 
@@ -99,7 +80,6 @@ function player_api.set_cloths(player, gender)
 	inv:set_size("cloths", 3)
 
 	if gender == "male" then
-		inv:add_item("cloths", '')
 		inv:add_item("cloths", 'player_api:cloth_male_upper_default')
 		inv:add_item("cloths", 'player_api:cloth_male_lower_default')
 	else
@@ -109,10 +89,11 @@ function player_api.set_cloths(player, gender)
 	end
 end
 
-function player_api.compose_cloth(player, gender)
+function player_api.compose_cloth(player)
 	if not(player_api.has_cloths(player)) then
 		return nil
 	end
+	local gender = player:get_meta():get_string("gender")
 	local inv = player:get_inventory()
 	local inv_list = inv:get_list("cloths")
 	local upper_ItemStack
@@ -121,14 +102,14 @@ function player_api.compose_cloth(player, gender)
 	for i = 1, #inv_list do
 		local item_name = inv_list[i]:get_name()
 		--minetest.chat_send_all(item_name)
-		local cloth_type = minetest.registered_items[item_name]._cloth_type
+		local cloth_type = minetest.get_item_group(item_name, "cloth")
 		--if cloth_type then minetest.chat_send_all(cloth_type) end
-		if cloth_type == "upper" then
-			upper_ItemStack = minetest.registered_items[item_name]._cloth_texture
-		elseif cloth_type == "lower" then
-			lower_ItemStack = minetest.registered_items[item_name]._cloth_texture
-		elseif cloth_type == "head" then
+		if cloth_type == 1 then
 			head_ItemStack = minetest.registered_items[item_name]._cloth_texture
+		elseif cloth_type == 2 then
+			upper_ItemStack = minetest.registered_items[item_name]._cloth_texture
+		elseif cloth_type == 3 then
+			lower_ItemStack = minetest.registered_items[item_name]._cloth_texture
 		end
 	end
 	local base_texture

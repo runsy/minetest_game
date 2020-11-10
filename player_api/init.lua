@@ -50,7 +50,7 @@ minetest.register_on_joinplayer(function(player)
 	if gender == "" then
 		player_api.select_gender(player_name)
 	else
-		local cloth = player_api.compose_cloth(player, gender)
+		local cloth = player_api.compose_cloth(player)
 		player_api.registered_models[player_api.get_gender_model(gender)].textures[1] = cloth
 		player_api.set_model(player, player_api.get_gender_model(gender))
 	end
