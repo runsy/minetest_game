@@ -72,10 +72,9 @@ player_api.register_cloth("player_api:cloth_male_lower_default", {
 	groups = {cloth = 3},
 })
 
-function player_api.set_cloths(player, gender)
-
+function player_api.set_cloths(player)
+	local gender = player:get_meta():get_string("gender")
 	--Create the "cloths" inventory
-
 	local inv = player:get_inventory()
 	inv:set_size("cloths", 3)
 
@@ -90,10 +89,10 @@ function player_api.set_cloths(player, gender)
 end
 
 function player_api.compose_cloth(player)
-	if not(player_api.has_cloths(player)) then
-		return nil
-	end
 	local gender = player:get_meta():get_string("gender")
+	if not(player_api.has_cloths(player)) then
+		player_api.set_cloths(player)
+	end
 	local inv = player:get_inventory()
 	local inv_list = inv:get_list("cloths")
 	local upper_ItemStack
