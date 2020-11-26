@@ -87,6 +87,8 @@ minetest.register_chatcommand("toggle_gender", {
 			meta:set_string("gender", new_gender)
 			player_api.set_model(player, player_api.get_gender_model(new_gender))
 			local gender_model = player_api.get_gender_model(new_gender)
+			local cloth = player_api.compose_cloth(player)
+			player_api.registered_models[gender_model].textures[1] = cloth
 			player_api.set_textures(player, models[gender_model].textures)
 			local new_gender_cap = new_gender:gsub("^%l", string.upper)
 			minetest.chat_send_player(name, S("Your gender is changed to").." "..S(new_gender_cap)..".")
