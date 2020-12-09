@@ -123,6 +123,7 @@ function player_api.compose_cloth(player)
 	local upper_ItemStack
 	local lower_ItemStack
 	local head_ItemStack
+	local underwear = false
 	for i = 1, #inv_list do
 		local item_name = inv_list[i]:get_name()
 		--minetest.chat_send_all(item_name)
@@ -134,7 +135,11 @@ function player_api.compose_cloth(player)
 			upper_ItemStack = minetest.registered_items[item_name]._cloth_texture
 		elseif cloth_type == 3 then
 			lower_ItemStack = minetest.registered_items[item_name]._cloth_texture
+			underwear = true
 		end
+	end
+	if not(underwear) then
+		lower_ItemStack = "cloth_lower_underwear_default.png"
 	end
 	local base_texture
 	if gender == "male" then
