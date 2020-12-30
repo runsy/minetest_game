@@ -172,7 +172,8 @@ function minetest.calculate_knockback(player, ...)
 end
 
 -- Check each player and apply animations
-minetest.register_globalstep(function()
+local timer = 0
+minetest.register_globalstep(function(dtime)
 	for _, player in pairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		local model_name = player_model[name]
@@ -265,6 +266,30 @@ minetest.register_globalstep(function()
 					player_set_animation(player, "stand", animation_speed_mod)
 				else
 					player_set_animation(player, "swin_stand", animation_speed_mod)
+				end
+			end
+			if on_water and player_pos.y < 0 then
+				timer = timer + dtime
+				if timer > 1 then
+					player_pos.y = player_pos.y + 1
+					minetest.add_particlespawner({
+						amount = 6,
+						time = 1,
+						minpos = player_pos,
+						maxpos = player_pos,
+						minvel = {x=0, y=0, z=0},
+						maxvel = {x=1, y=5, z=1},
+						minacc = {x=0, y=0, z=0},
+						maxacc = {x=1, y=1, z=1},
+						minexptime = 0.2,
+						maxexptime = 1.0,
+						minsize = 1,
+						maxsize = 1.5,
+						collisiondetection = false,
+						vertical = false,
+						texture = "bubble.png",
+					})
+					timer = 0
 				end
 			end
 		end
