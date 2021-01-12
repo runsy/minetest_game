@@ -52,7 +52,7 @@ function player_api.set_base_textures(player)
 	if gender == "male" then
 		base_texture["eyebrowns"] = {texture = "player_eyebrowns_default.png", color = nil}
 		base_texture["eye"] = "player_brown_eye.png"
-		base_texture["mouth"] = "player_male_mouth_default.png"
+		base_texture["mouth"] = {texture = "player_male_mouth_default.png", color = nil}
 		base_texture["hair"] = {texture = "player_male_hair_default.png", color = "brown"}
 	else
 		base_texture["eyebrowns"] = {texture = "player_eyebrowns_default.png", color = nil}
