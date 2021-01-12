@@ -129,8 +129,6 @@ function player_api.set_cloths(player)
 end
 
 function player_api.compose_cloth(player)
-	local meta = player:get_meta()
-	local gender = meta:get_string("gender")
 	local inv = player:get_inventory()
 	local inv_list = inv:get_list("cloths")
 	local upper_ItemStack, lower_ItemStack, footwear_ItemStack, head_ItemStack
@@ -155,12 +153,8 @@ function player_api.compose_cloth(player)
 		lower_ItemStack = "cloth_lower_underwear_default.png"
 	end
 	local base_texture
-	if gender == "male" then
-		base_texture = "player_male_base.png"
-	else
-		base_texture = "player_female_base.png"
-	end
-	local cloth = "[combine:128x64:0,0="..base_texture
+	base_texture = player_api.compose_base_texture(player)
+	local cloth = base_texture.."^".."[combine:128x64:0,0="
 	if upper_ItemStack then
 		cloth = cloth .. ":32,32="..upper_ItemStack
 	end
