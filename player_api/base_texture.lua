@@ -18,6 +18,18 @@ player_api.hair_colors = {
 	},
 }
 
+player_api.skin_colors = {
+	normal = nil,
+	brown = {
+		color = "#a56d40",
+		ratio = 150,
+	},
+	black = {
+		color = "#462409",
+		ratio = 127,
+	},
+}
+
 function player_api.get_base_texture_table(player)
 	local meta = player:get_meta()
 	local base_texture_str = meta:get_string("base_texture")
@@ -41,25 +53,31 @@ function player_api.set_base_textures(player)
 		base_texture["eyebrowns"] = {texture = "player_eyebrowns_default.png", color = nil}
 		base_texture["eye"] = "player_brown_eye.png"
 		base_texture["mouth"] = "player_male_mouth_default.png"
-		base_texture["hair"] = {texture = "player_male_hair_default.png", color = {color = player_api.hair_colors["brown"].color, ratio = player_api.hair_colors["brown"].ratio}}
+		base_texture["hair"] = {texture = "player_male_hair_default.png", color = "brown"}
 	else
 		base_texture["eyebrowns"] = {texture = "player_eyebrowns_default.png", color = nil}
 		base_texture["eye"] = "player_blue_eye.png"
 		base_texture["mouth"] = {texture = "player_female_mouth_default.png", color = nil}
-		base_texture["hair"] = {texture = "player_female_hair_default.png", color = {color = player_api.hair_colors["brown"].color, ratio = player_api.hair_colors["brown"].ratio}}
+		base_texture["hair"] = {texture = "player_female_hair_default.png", color = "brown"}
 	end
-	--blonde={color = "#979c09", ratio = 127}
-	--brown={color = "#7a4c20", ratio = 175}}
-	--red={color = "#ed6800", ratio = 140}
-	--black={color = "#000000", ratio = 175}
-	base_texture["skin"] = {texture = "player_skin.png", color = nil}
+	base_texture["skin"] = {texture = "player_skin.png", color = "normal"}
 	player_api.set_base_texture(player, base_texture)
 end
 
 function player_api.colorize_texture(player, what, texture)
 	local base_texture = player_api.get_base_texture_table(player)
-	if  base_texture[what]["color"] and base_texture[what]["color"].color then
-		return texture .. "\\^\\[colorize\\:\\"..base_texture[what]["color"].color.."\\:"..tostring(base_texture[what]["color"].ratio)
+	if base_texture[what]["color"] then
+		local value
+		if what == "skin" then
+			value = player_api.skin_colors[base_texture[what]["color"]]
+		else --"hair"
+			value = player_api.hair_colors[base_texture[what]["color"]]
+		end
+		if value then
+			return texture .. "\\^\\[colorize\\:\\"..value.color.."\\:"..tostring(value.ratio)
+		else
+			return texture
+		end
 	else
 		return texture
 	end
