@@ -152,8 +152,16 @@ function player_api.compose_cloth(player)
 	if not(underwear) then
 		lower_ItemStack = "cloth_lower_underwear_default.png"
 	end
-	local base_texture
-	base_texture = player_api.compose_base_texture(player)
+	local base_texture = player_api.compose_base_texture(player, {
+		canvas_size ="128x64",
+		skin_texture = "player_skin.png",
+		eyebrowns_pos = "16,16",
+		eye_right_pos = "18,24",
+		eye_left_pos = "26,24",
+		mouth_pos = "16,28",
+		hair_preview = false,
+		hair_pos = "0,0",
+	})
 	local cloth = base_texture.."^".."[combine:128x64:0,0="
 	if upper_ItemStack then
 		cloth = cloth .. ":32,32="..upper_ItemStack

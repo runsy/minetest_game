@@ -42,19 +42,32 @@ function player_api.compose_skin(player, skin)
 	end
 end
 
-function player_api.compose_base_texture(player)
+function player_api.compose_base_texture(player, def)
 	local base_texture = player_api.get_base_texture_table(player)
-	local texture = player_api.compose_skin(player, "[combine:128x64:0,0=player_skin.png")
-	for key,value in pairs(base_texture) do
+	local texture = player_api.compose_skin(player, "[combine:"..def.canvas_size..":0,0="..def.skin_texture)
+
+	local ordered_keys = {}
+
+	for key in pairs(base_texture) do
+		table.insert(ordered_keys, key)
+	end
+
+	table.sort(ordered_keys)
+
+	for i = 1, #ordered_keys do
+		local key, value = ordered_keys[i], base_texture[ordered_keys[i]]
 		if key == "eyebrowns" then
-			texture = texture .. ":16,16="..value
+			texture = texture .. ":"..def.eyebrowns_pos.."="..value
 		elseif key == "eye" then
-			texture = texture .. ":18,24="..value
-			texture = texture .. ":26,24="..value
+			texture = texture .. ":"..def.eye_right_pos.."="..value
+			texture = texture .. ":"..def.eye_left_pos.."="..value
 		elseif key == "mouth" then
-			texture = texture .. ":16,28="..value
+			texture = texture .. ":"..def.mouth_pos.."="..value
 		elseif key == "hair" then
-			texture = texture .. ":0,0="..value
+			if def.hair_preview then
+				value = string.sub(value, 0, -5).."_preview.png"
+			end
+			texture = texture .. ":"..def.hair_pos.."="..value
 		end
 	end
 	return texture

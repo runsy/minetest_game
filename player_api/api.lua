@@ -322,6 +322,7 @@ end
 
 function player_api.set_texture(player)
 	local cloth = player_api.compose_cloth(player)
+	local gender = player_api.get_gender(player)
 	local gender_model = player_api.get_gender_model(gender)
 	player_api.registered_models[gender_model].textures[1] = cloth
 	player_api.set_model(player, gender_model)
