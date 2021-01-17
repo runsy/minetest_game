@@ -13,8 +13,8 @@ player_api.hair_colors = {
 		ratio = 140,
 	},
 	blonde = {
-		color = "#979c09",
-		ratio = 127,
+		color = "#a7ad06",
+		ratio = 112,
 	},
 }
 
