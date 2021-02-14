@@ -106,9 +106,12 @@ local function yaw_to_degrees(yaw)
 	return(yaw * 180.0 / math.pi)
 end
 
-local function move_head(player)
+local function move_head(player, on_water)
 	local look_at_dir = player:get_look_dir()
 	local pitch = yaw_to_degrees(math.asin(look_at_dir.y))
+	if on_water then
+		pitch = pitch + 70
+	end
 	local head_rotation = {x= pitch, y= 0, z= 0} -- the head movement {pitch, yaw, roll}
 	local head_offset
 	if minetest.get_modpath("3d_armor")~=nil then
@@ -256,7 +259,7 @@ minetest.register_globalstep(function(dtime)
 				end
 			end
 
-			move_head(player)
+			move_head(player, on_water)
 
 			-- Apply animations based on what the player is doing
 			if player:get_hp() == 0 then
