@@ -101,6 +101,24 @@ minetest.register_chatcommand("toggle_gender", {
     end,
 })
 
+--converts yaw to degrees
+local function yaw_to_degrees(yaw)
+	return(yaw * 180.0 / math.pi)
+end
+
+local function move_head(player)
+	local look_at_dir = player:get_look_dir()
+	local pitch = yaw_to_degrees(math.asin(look_at_dir.y))
+	local head_rotation = {x= pitch, y= 0, z= 0} -- the head movement {pitch, yaw, roll}
+	local head_offset
+	if minetest.get_modpath("3d_armor")~=nil then
+		head_offset = 6.75
+	else
+		head_offset = 6.3
+	end
+	player:set_bone_position("Head", {x=0, y=head_offset, z=0}, head_rotation) --set the head movement
+end
+
 -- Called when a player's appearance needs to be updated
 function player_api.set_model(player, model_name)
 	local name = player:get_player_name()
@@ -237,6 +255,8 @@ minetest.register_globalstep(function(dtime)
 						on_water = false
 				end
 			end
+
+			move_head(player)
 
 			-- Apply animations based on what the player is doing
 			if player:get_hp() == 0 then
