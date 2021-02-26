@@ -68,20 +68,12 @@ Obsidian Block=Bloque de obsidiana
 Dirt=Tierra
 Dirt with Grass=Tierra con pasto
 Dirt with Grass and Footsteps=Tierra con pasto y pisadas
-<<<<<<< HEAD:default/locale/default.es.tr
 Dirt with Savanna Grass=Tierra con pasto de sabana
-=======
-Dirt with Savanna Grass=Tierra con hierba de sabana
->>>>>>> upstream/master:mods/default/locale/default.es.tr
 Dirt with Snow=Tierra con nieve
 Dirt with Rainforest Litter=Tierra con hojarasca de selva tropical
 Dirt with Coniferous Litter=Tierra con hojarasca de coníferas
 Savanna Dirt=Tierra de sabana
-<<<<<<< HEAD:default/locale/default.es.tr
 Savanna Dirt with Savanna Grass=Tierra de sabana con pasto de sabana
-=======
-Savanna Dirt with Savanna Grass=Tierra de sabana con hierba de sabana
->>>>>>> upstream/master:mods/default/locale/default.es.tr
 Permafrost=Permafrost
 Permafrost with Stones=Permafrost pedregoso
 Permafrost with Moss=Permafrost musgoso
@@ -138,11 +130,7 @@ Papyrus=Papiro
 Dry Shrub=Arbusto seco
 Jungle Grass=Pasto de jungla
 Grass=Pasto
-<<<<<<< HEAD:default/locale/default.es.tr
 Savanna Grass=Pasto de sabana
-=======
-Savanna Grass=Hierba de sabana
->>>>>>> upstream/master:mods/default/locale/default.es.tr
 Fern=Helecho
 Marram Grass=Carrizo
 Bush Stem=Tallo de arbusto
@@ -193,19 +181,11 @@ Glass=Vidrio
 Obsidian Glass=Vidrio de obsidiana
 Brick Block=Bloque de ladrillo
 Mese Lamp=Lámpara de mese
-<<<<<<< HEAD:default/locale/default.es.tr
-Apple Wood Mese Post Light=Luz de poste de mese de manzano
-Acacia Wood Mese Post Light=Luz de poste de mese de acacia
-Jungle Wood Mese Post Light=Luz de poste de mese tropical
-Pine Wood Mese Post Light=Luz de poste de mese de pino
-Aspen Wood Mese Post Light=Luz de poste de mese de álamo
-=======
 Apple Wood Mese Post Light=Poste de luz de madera de manzano
 Acacia Wood Mese Post Light=Poste de luz de madera de acacia
-Jungle Wood Mese Post Light=Poste de luz de madera de jungla
+Jungle Wood Mese Post Light=Poste de luz de madera tropical
 Pine Wood Mese Post Light=Poste de luz de madera de pino
 Aspen Wood Mese Post Light=Poste de luz de madera de álamo
->>>>>>> upstream/master:mods/default/locale/default.es.tr
 Cloud=Nube
 Wooden Pickaxe=Pico de madera
 Stone Pickaxe=Pico de piedra
