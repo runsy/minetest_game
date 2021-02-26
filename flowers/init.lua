@@ -310,6 +310,7 @@ local waterlily_def = {
 	use_texture_alpha = true,
 	inventory_image = "flowers_waterlily.png",
 	wield_image = "flowers_waterlily.png",
+	use_texture_alpha = "clip",
 	liquids_pointable = true,
 	walkable = false,
 	buildable_to = true,
